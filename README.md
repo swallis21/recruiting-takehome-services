@@ -45,4 +45,4 @@ Deliverables Checklist
 2. API accepts POST and returns data per above requirements
 3. Repo README has instructions for running and testing the API
 4. Repo README has information about what you'd do next, per above requirements
-5. Create a new GitHub repo and share it with teresa@svtrobotics.com
+5. Create a new public GitHub repo and upload its url to the link you received in your test invite.
