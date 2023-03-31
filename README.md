@@ -24,7 +24,7 @@ The distance between two points is found with the following formula:
 
 ![distance formula](https://user-images.githubusercontent.com/7139741/122107356-f915e300-cde8-11eb-8699-f87b50046350.png)
 
-If the API receives a payload of:
+If the API receives a JSON payload of:
 
 ```
 {
@@ -34,7 +34,7 @@ If the API receives a payload of:
 }
 ```
 
-It should respond with a payload of _(note: this is just an example, your results may be different depending on the data available from the API at the time.)_:
+It should respond with a JSON payload of _(note: this is just an example, your results may be different depending on the data available from the API at the time.)_:
 
 ```
 {
@@ -48,6 +48,7 @@ It should respond with a payload of _(note: this is just an example, your result
 
 1. API with POST endpoint that accepts and returns data per the above task description
    1. POST endpoint **must** be **`https://localhost:5001/api/robots/closest/`** or **`http://localhost:5000/api/robots/closest/`**
+   2. POST endpoint **must** accept and return JSON
 2. API can be run locally and tested using Postman or other similar tools
 3. Description of what features, functionality, etc. you would add next and how you would implement them - you shouldn't spend more than a few hours on this project, so we want to know what you'd do next (and how you'd do it) if you had more time
 4. Use git and GitHub for version control
@@ -59,4 +60,4 @@ Deliverables Checklist
 2. API accepts POST and returns data per above requirements
 3. Repo README has instructions for running and testing the API
 4. Repo README has information about what you'd do next, per above requirements
-5. Create a new GitHub repo and share it with teresa@svtrobotics.com
+5. Create a new public GitHub repo and upload its url to the link you received in your test invite.
