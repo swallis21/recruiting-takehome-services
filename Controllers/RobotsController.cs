@@ -30,7 +30,7 @@ namespace SVTRoboticsAPI.Controllers
             }
             string test = await response.Content.ReadAsStringAsync();
             List<Robot>? robots = await response.Content.ReadFromJsonAsync<List<Robot>>();
-            if (robots == null)
+            if (robots == null || robots.Count == 0)
             {
                 return new JsonResult("{ \"success\": false,  \"error\": \"The /robots API endpoint returned no data.\" }");
             }
