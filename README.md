@@ -1,3 +1,17 @@
+# Running and Testing
+
+Open the solution in Visual Studio and use the IIS Express configuration to launch the API. You may need to use the provided PowerShell script to regenerate the SSL certificate if you receive a connection reset error while running the API in HTTPS mode.
+
+If you use Postman to test the API (as I did), you may need to disable SSL verification since IIS Express uses a self-signed certificate. As indicated below, send POST requests with the Body set to raw/JSON.
+
+# Next Steps
+
+The instructions are not entirely clear about some things, so I would probably seek clarification on them to refine the algorithm. For instance, it says "[if] there is more than 1 robot within 10 distance units of the load, return the one with the most battery remaining." My algorithm returns the closest robot, and breaks any ties with the battery level, so it's unclear how "within 10 distance units" may factor in. If there are no robots within 10 distance units, should it return an error? The requirements specifically state "based on which one is closest [to] the load's location" so I presumed not.
+
+I presume that battery level would be significant for the purposes of the robots moving. So there would likely need to be some additional refining to disqualify robots which have insufficient battery to reach their goal -- for example, a robot 1 distance unit away but with 0 battery level should not be chosen over one with a further distance but sufficient battery. However, the challenge does not explicitly account for this so I did not include it, only breaking ties by battery level but otherwise deciding solely by closest distance (as above). But that's the sort of thing I'd run up the chain in a real-world scenario. If that's not the case, it shows the importance of clear acceptance criteria for a project!
+
+On a long-term basis I imagine that this API would need to be expanded to give instructions to the robots. If a robot is moving between points, then it would need to be "reserved" for that task and not returned as the closest robot. Its battery level would also need to be updated after it's arrived.
+
 # SVT Robotics - Take Home Recruiting Assessment
 
 One of SVT's microservices calculates which robot should transport a pallet from point A to point B based on which robot is the closest and has the most battery left if there are multiple in the proximity of the load's location. You'll use a provided API endpoint to create a simplified robot routing API.
