@@ -26,18 +26,30 @@ namespace SVTRoboticsAPI.Controllers
             var response = await http.GetAsync(ROBOTS_API_ENDPOINT);
             if (!response.IsSuccessStatusCode)
             {
-                return new JsonResult("{ \"success\": false,  \"error\": \"The /robots API endpoint is unreachable.\" }");
+                return new JsonResult(new { error = "The /robots API endpoint is unreachable." });
             }
             string test = await response.Content.ReadAsStringAsync();
             List<Robot>? robots = await response.Content.ReadFromJsonAsync<List<Robot>>();
             if (robots == null || robots.Count == 0)
             {
-                return new JsonResult("{ \"success\": false,  \"error\": \"The /robots API endpoint returned no data.\" }");
+                return new JsonResult(new { error = "The /robots API endpoint returned no data." });
             }
-            ChosenRobot chosenRobot = _utilities.ChooseRobot(robots,
-                bodyJson.GetProperty("loadId").ToString(),
-                bodyJson.GetProperty("x").GetInt32(),
-                bodyJson.GetProperty("y").GetInt32());
+            ChosenRobot? chosenRobot = null;
+            try
+            {
+                chosenRobot = _utilities.ChooseRobot(robots,
+                    bodyJson.GetProperty("loadId").ToString(),
+                    bodyJson.GetProperty("x").GetInt32(),
+                    bodyJson.GetProperty("y").GetInt32());
+            }
+            catch(KeyNotFoundException)
+            {
+                return new JsonResult(new { error = "You must specify loadId, x, and y." });
+            }
+            if (chosenRobot == null)
+            {
+                return new JsonResult(new { error = "The API was unable to find a suitable robot." });
+            }
             return new JsonResult(chosenRobot);
         }
     }
